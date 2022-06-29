@@ -8,5 +8,7 @@
 int _printf(const char *format, ...);
 int print_char(char c);
 int print_str(char *c);
+int stringlength(char *str);
+int find_print(va_list ap, const char *format);
 
 #endif

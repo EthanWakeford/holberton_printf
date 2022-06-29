@@ -1,38 +1,19 @@
 #include "main.h"
 
+/**
+*_printf - prints to standard output
+*@format: the format to print out
+*Return: the count of characters printed if successful, -1 if failure
+*/
+
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i = 0;
-	char *str;
-	int count = 0;
-
+	int count;
+	
 	va_start(ap, format);
-	while (format != NULL && format[i] != '\0')
-	{
-		if (format[i] == '%')
-		{
-			i++;
-			switch(format[i])
-			{
-				case 'c':
-					break;
-				case 's':
-					break;
-				case '%'
-					break;
-				case 'd':
-					break;
-				case 'i':
-					break;
-				default
-					exit(98);
-			}
-
-
-		}
-		else
-			_putchar(format[i]);
-		i++;
-	}
+	if (format == NULL)
+		return (-1);
+	count = find_print(ap, format);
 	return (count);
+}
