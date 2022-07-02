@@ -1,10 +1,9 @@
 #include "main.h"
-#include <string.h>
 
 /**
  * print_char - prints a string
  * @c: character to be printed
- * Return: char
+ * Return: count
  */
 
 int print_char(char c)

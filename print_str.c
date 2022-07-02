@@ -14,6 +14,6 @@ int print_str(char *c)
 	{
 	(write(1, &c[i], 1));
 	}
-	
+
 	return (stringlength(c));
 }
