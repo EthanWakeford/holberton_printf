@@ -1,19 +1,50 @@
 #include "main.h"
 
-/**
-*_printf - prints to standard output
-*@format: the format to print out
-*Return: the count of characters printed if successful, -1 if failure
-*/
+int (*get_func(char conv_spec))(va_list)
+{
+    int i = 0;
+    type_t get_type[] = {
+        {'c', print_char},
+        {'s', print_str},
+        {'d', print_dec},
+        {NULL, NULL}
+	};
 
-int _printf(const char *format, ...)
+    for (i = 0; get_type[i].form_match != conv_spec; i++)
+    {
+        if (get_type[i].form_match == NULL)
+            return (NULL);
+	}
+        return (get_type[i].func);
+}
+
+int _printf (const char *format, ...)
 {
 	va_list ap;
-	int count;
-	
+	int i, count = 0;
+	int (*print)(va_list);
+
 	va_start(ap, format);
 	if (format == NULL)
 		return (-1);
-	count = find_print(ap, format);
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] == '%')
+		{
+			i++;
+			print = get_func(format[i]);
+			if (print == NULL)
+			{
+				if (format[i] != '%')
+					count += _putchar('%');
+				count += _putchar(format[i]);
+			}
+			else
+				count += print(ap);
+		}
+		else
+			count += _putchar(format[i]);
+		i++;
+	}
 	return (count);
 }
